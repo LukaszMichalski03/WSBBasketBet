@@ -1,0 +1,72 @@
+﻿@using BasketBet.Web.ViewModels
+@using Newtonsoft.Json
+@model HomeVM
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-wrapper">
+    <div class="container-white">
+        @foreach (var match in Model.Matches)
+        {
+            <div class="flex-container">
+                <div class="date-container">
+                    <p class="date-text">@match.Date.ToString("dd.MM.yyyy")</p>
+                </div>
+                <div class="content-container">
+                    <div class="teams-column">
+                        <div class="flex-content">
+                            <p>@match.HomeTeamVM.Name</p>
+                            <span>vs</span>
+                            <p>@match.AwayTeamVM.Name</p>
+                        </div>
+                    </div>
+                    <div class="buttons-column">
+                        <div class="flex-buttons">
+                            <button class="btn white-btn" onclick="toggleBet('@JsonConvert.SerializeObject(match)', 'Home', this)">
+                                <p>@match.HomeTeamVM.Name</p>
+                                <span>@match.OddsHomeTeam</span>
+                            </button>
+                            <button class="btn white-btn" onclick="toggleBet('@JsonConvert.SerializeObject(match)', 'Away', this)">
+                                <p>@match.AwayTeamVM.Name</p>
+                                <span>@match.OddsAwayTeam</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+   
+    <div class="container-blue">
+        <div class="container-blue-header">
+            <p id="count-bets">0 Bets</p>
+            <button type="button" class="btn btn-danger" onclick="removeAllBets()">Clear</button>
+        </div>
+        <div class="container-blue-overflow" id="betContainerOverflow">
+            <!-- wyswietlane elementy z listy js-->
+        </div>
+
+        <div class="container-blue-footer">
+            <div class="con-footer-row">
+                <div class="con-footer-row-left">
+                    <input type="number" placeholder="Points" />
+                </div>
+                <p class="totalcourse">1.00</p>
+            </div>
+            <div class="con-footer-row">
+                <p>Potential Winnings</p>
+                <p class="total-winning">0 points</p>
+            </div>
+            <div class="con-footer-row">
+                <button type="button" class="bet-button" onclick="sendBetsToController()">Bet</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/js/site.js"></script>

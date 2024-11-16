@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BasketBet.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BasketBet.Web.styles.css" asp-append-version="true" />
+</head>
+<body> 
+   
+        <nav class="nav" id="navBar">
+            <div class="nav-logo">
+                <p>BASKETBET.</p>
+            </div>
+        <div class="nav-menu" id="navMenu">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index" class="link" >Home</a></li>
+                <li><a asp-controller="Home" asp-action="MyBets" class="link">My Bets</a></li>
+                <li><a asp-controller="Home" asp-action="Standings" class="link">Standings</a></li>
+                <li><a asp-controller="Home" asp-action="LatestResults" class="link">Latest Results</a></li>
+                <li><a asp-controller="Home" asp-action="LeaderBoards" class="link">Leaderboards</a></li>
+            </ul>
+        </div>
+
+            <partial name="_NavbarButtonsPartial"/>
+            
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu" onclick="myMenuFunction()">
+                <img width="40" height="40" src="https://cdn-icons-png.flaticon.com/128/4254/4254068.png" />
+                </i>
+            </div>
+        </nav>
+        
+    
+    <div class="container-fluid mt-13">
+        <main role="main" class="pb-0 ">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+
+        function myMenuFunction() {
+            var i = document.getElementById("navMenu");
+
+            if (i.className === "nav-menu") {
+                i.className += " responsive";
+            } else {
+                i.className = "nav-menu";
+            }
+        }
+
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
